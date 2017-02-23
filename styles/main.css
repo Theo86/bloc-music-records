@@ -20,12 +20,8 @@ html {
  }
 
  .navbar {
-     position: relative;
      padding: 0.5rem;
-     /* #1 */
-     background-color: rgba(101,18,95,0.5);
-     /* #2 */
-     z-index: 1;
+     background-color: rgb(101,18,95);
  }
  
  .navbar .logo {
@@ -120,6 +116,14 @@ html {
      color: rgb(233,50,117);
      font-size: 5rem;
  }
+
+.links-container .navbar-link:hover {
+    color: rgb(233,50,117);
+}
+
+.links-container .navbar-link:active {
+    background-color: white;
+}
 
  .container {
      margin: 0 auto;
