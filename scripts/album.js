@@ -31,6 +31,22 @@
  };
 
 
+ var albumCher = {
+     title: 'Love Hurts',
+     artist: 'Cher',
+     label: 'Imperial',
+     year: '1991',
+     albumArtUrl: 'assets/images/album_covers/15.png',
+     songs: [
+         { title: 'Save up All your Tears', duration: '4:00' },
+         { title: 'Love Hurts', duration: '4:19' },
+         { title: 'Love and Understanding', duration: '2:51'},
+         { title: 'Fires of Eden', duration: '1:58' },
+         { title: 'I\'ll Never Stop Loving You', duration: '3:12'}
+     ]
+ };
+
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -43,30 +59,40 @@
      return template;
  };
 
-
- var setCurrentAlbum = function(album) {
-     // #1
+     // Select elemtns that we want to populate with text dynamically
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
-     // #2
-     albumTitle.firstChild.nodeValue = album.title;
+
+
+ var setCurrentAlbum = function(album) {
+     // Assign values to each part of the album (text, images)
+     albumTitle.firstChild.nodeValue = album.name;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
  
-     // #3
+     // Clear contents of album song list container
      albumSongList.innerHTML = '';
  
-     // #4
+     // Build list of songs from album JavaScript object
      for (var i = 0; i < album.songs.length; i++) {
-         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
      }
  };
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumCher];
+     var index = 1;
+     albumImage.addEventListener("click", function(event) {
+         setCurrentAlbum(albums[index]);
+         index++;
+         if (index == albums.length) {
+             index = 0;
+         }
+     });
  };
