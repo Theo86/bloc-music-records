@@ -78,6 +78,7 @@ var findParentByClassName = function(element, targetClass) {
 };
 
 
+
 var getSongItem = function(element) {
     switch (element.className) {
         case 'album-song-button':
