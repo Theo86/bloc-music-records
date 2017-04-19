@@ -1,20 +1,32 @@
-//setSong
+//Creating setSong function taking the argument songNumber
+//Assigns currentlyPlayingSongNumber and currentSongFromAlbum a new value
+//based on the new song number
 var setSong = function(songNumber){
     currentPlayingSongNumber = parseInt(songNumber);
     currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 };
 
+//Difference between these two functions is the parseInt use in the first function
 
+//The parseInt() function parses a string argument and returns an integer of the specified radix (the base in mathematical numeral systems).
 
+//Creating setSong function taking the argument songNumber
+//Assigns currentlyPlayingSongNumber and currentSongFromAlbum a new value
+//based on the new song number
 var setSong = function(songNumber) {
   currentlyPlayingSongNumber = songNumber;
   currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
 };
 
+
+//Creatiing a function named getSongNumberCell here
+//taking one argument number
+//retuning the song number element that corresponds to that song number
 var getSongNumberCell = function(number) {
   return $('.song-item-number[data-song-number="' + number + '"]')
 };
 
+//Creating a function createSongRow taking arguments songNumber, songName, songLength
 var createSongRow = function(songNumber, songName, songLength) {
   var template = 
       '<tr class="album-view-song-item">'
@@ -26,10 +38,15 @@ var createSongRow = function(songNumber, songName, songLength) {
     
   var $row = $(template);
   
-  var clickHandler = function() {
+    
+    //handler
+    //Type: Function( Event eventObject )
+    //A function to execute each time the event is triggered.
+    var clickHandler = function() {
     
     var songItemNumber = $(this).attr('data-song-number');
     
+    //Replace all instance with getSongNumberCell call
     if (currentlyPlayingSongNumber !== null) {
       var whatSongIsPlaying = getSongNumberCell(currentlyPlayingSongNumber);
       whatSongIsPlaying.html(currentlyPlayingSongNumber);
@@ -47,6 +64,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     }
   };
   
+  //function event for when user hover and plays a song
   var onHover = function(event) {
     var songNumberElement = $(this).find('.song-item-number');
     var songNumber = songNumberElement.attr('data-song-number');
@@ -128,6 +146,7 @@ var nextSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.title);
     $('.main-controls .play-pause').html(playerBarPauseButton);
     
+    //Replace all instance with getSongNumberCell call
     var lastSongNumber = getLastSongNumber(currentSongIndex);
     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
